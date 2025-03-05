@@ -10,7 +10,15 @@ const humidity = document.querySelector('.humidity')
 const APIkey = 'ff70be1787e7006b3d7ccb5f0268b362'
 let API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIkey}&units=metric`
 
+document.addEventListener('DOMContentLoaded',()=>{
+	if(localStorage.getItem("City")!=null){
+		input.value=localStorage.getItem("City")
+		getWeather()
+	}
+})
+
 async function getWeather() {
+	localStorage.setItem("City",input.value)
 	try {
 		API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${APIkey}&units=metric`
 		const res = await fetch(API_URL)
